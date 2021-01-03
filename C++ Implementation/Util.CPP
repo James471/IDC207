@@ -24,6 +24,64 @@ class Util
         return gcd(b,a%b);
     }
 
+    long long* egcd(long long a, long long b)
+    {
+        // Source- https://web.iisermohali.ac.in/moodle/mod/page/view.php?id=8554
+        long long a0, b0, x0, y0, x1, y1, p, q;
+        long long ar[6];
+        if(a >= b)
+        {
+            a0 = a;
+            b0 = b;
+            x0 = 1;
+            x1 = 0;
+            y0 = 0;
+            y1 = 1;
+            p = 1;
+        }
+        else
+        {
+            a0 = b;
+            b0 = a;
+            x0 = 1;
+            x1 = 0;
+            y0 = 0;
+            y1 = 1;
+            p = 0;
+        }
+        while (b0 != 0)
+        {
+            q = a0/b0;
+            a0 = b0;
+            b0 = a0 % b0;
+            x0 = q*x0 + x1;
+            x1 = x0;
+            y0 = q*y0 + y1;
+            y1 = y0;
+            p = 1 - p;
+        }
+        if (p == 1)
+        {
+            ar[0] = a0;
+            ar[1] = y1;
+            ar[2] = x1;
+            ar[3] = a*y0;
+            ar[4] = y0;
+            ar[5] = x0;
+        }
+        else
+        {
+            ar[0] = a0;
+            ar[1] = y0 - y1;
+            ar[2] = x0 - x1;
+            ar[3] = a*y0;
+            ar[4] = y0;
+            ar[5] = x0;
+        }
+        cout<<ar[1]<<"*"<<a<<ar[2]<<"*"<<b<<"=gcd("<<a<<","<<b<<")="<<ar[0];
+        return ar;
+    }
+
     long long lcm(long long a, long long b)
     {
         return (a*b)/gcd(a,b);
