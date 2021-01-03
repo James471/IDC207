@@ -5,7 +5,7 @@ class DLP
 {
     static long long callsToAlgo;
     static long long callsToDiscreetLogBruteForce;
-    
+    public:
     long long dot(long long a, long long b, long long N)
     {
         return (a*b)%N;
